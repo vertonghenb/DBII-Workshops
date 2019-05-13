@@ -5,9 +5,9 @@ GO
 
 -- Update the existing records
 UPDATE ProductType
-SET AmountOfProducts = (SELECT COUNT(*) 
+SET AmountOfProducts = ISNULL((SELECT COUNT(*) 
                         FROM Product
-                        WHERE Product.ProductTypeID = ProductType.ProductTypeID)
+                        WHERE Product.ProductTypeID = ProductType.ProductTypeID), 0)
                         -- Table prefixes are mandatory here, why?
 GO
 
